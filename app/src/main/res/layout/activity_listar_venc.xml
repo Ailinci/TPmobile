@@ -20,7 +20,6 @@
         android:id="@+id/button14"
         android:layout_width="wrap_content"
         android:layout_height="65dp"
-        android:layout_marginStart="36dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/button_menu"
         android:text="Lista de vencimiento"
@@ -28,10 +27,11 @@
         app:icon="@drawable/list"
         app:iconPadding="8dp"
         app:iconSize="24dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/btnVolverListar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

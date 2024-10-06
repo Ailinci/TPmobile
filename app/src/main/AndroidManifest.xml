@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MobileClub"
         tools:targetApi="31">
         <activity
+            android:name=".Menu"
+            android:exported="false" />
+        <activity
             android:name=".Factura"
             android:exported="false" />
         <activity
@@ -26,9 +29,6 @@
             android:exported="false" />
         <activity
             android:name=".Carnet"
-            android:exported="false" />
-        <activity
-            android:name=".Menu"
             android:exported="false" />
         <activity
             android:name=".Registro"

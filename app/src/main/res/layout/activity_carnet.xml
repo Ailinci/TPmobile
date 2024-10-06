@@ -30,7 +30,7 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/btnVolverCarnet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

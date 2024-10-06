@@ -1,20 +1,33 @@
 package com.example.mobileclub
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class Menu : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_menu)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        val btnIrRegistro = findViewById<Button>(R.id.btnIrRegistro)
+        val btnIrGenerarCarnet = findViewById<Button>(R.id.btnIrGenerarCarnet)
+        val btnIrPago = findViewById<Button>(R.id.btnIrPago)
+        val btnIrListar = findViewById<Button>(R.id.btnIrListar)
+
+        btnIrRegistro.setOnClickListener {
+            NavigationUtils.navigateToActivity(this, Registro::class.java)
+        }
+        btnIrGenerarCarnet.setOnClickListener {
+            NavigationUtils.navigateToActivity(this, Carnet::class.java)
+        }
+        btnIrPago.setOnClickListener {
+            NavigationUtils.navigateToActivity(this, Pago::class.java)
+        }
+        btnIrListar.setOnClickListener {
+            NavigationUtils.navigateToActivity(this, ListarVenc::class.java)
         }
     }
 }

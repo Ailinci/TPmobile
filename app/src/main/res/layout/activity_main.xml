@@ -22,8 +22,7 @@
         app:srcCompat="@drawable/no_sesdf" />
 
     <Button
-        android:id="@+id/button"
-        style="@style/Widget.AppCompat.Button"
+        android:id="@+id/btnLogin"
         android:layout_width="122dp"
         android:layout_height="50dp"
         android:layout_marginBottom="32dp"
@@ -37,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/login_user"
         android:layout_width="209dp"
         android:layout_height="48dp"
         android:layout_marginBottom="32dp"
@@ -47,13 +46,13 @@
         android:hint="@string/usuario"
         android:inputType="text"
         android:textAlignment="viewStart"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword"
+        app:layout_constraintBottom_toTopOf="@+id/login_passw"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/login_passw"
         android:layout_width="208dp"
         android:layout_height="48dp"
         android:layout_marginBottom="32dp"
@@ -61,7 +60,7 @@
         android:ems="10"
         android:hint="@string/contrase_a"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent" />
