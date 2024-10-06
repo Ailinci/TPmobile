@@ -19,4 +19,8 @@
     <string name="dni">DNI:</string>
     <string name="volver">VOLVER</string>
     <string name="generar_pdf">Generar PDF</string>
+    <string name="mi_club">MI CLUB</string>
+    <string name="_3342">$3342</string>
+    <string name="club_deportivo">CLUB DEPORTIVO</string>
+    <string name="todo">TODO</string>
 </resources>
