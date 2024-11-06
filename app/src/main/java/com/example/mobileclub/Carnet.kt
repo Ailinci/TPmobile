@@ -17,6 +17,8 @@ class Carnet : AppCompatActivity() {
     private lateinit var sociosHelper: SociosHelper
     private lateinit var cardViewCarnet: CardView
     private lateinit var pdfService: PdfService
+    private lateinit var permissionHandler: PermissionHandler
+    private var pendingDNI: String? = null // Para guardar el DNI cuando esperamos permisos
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +26,7 @@ class Carnet : AppCompatActivity() {
 
         sociosHelper = SociosHelper(this)
         pdfService = PdfService(this)
+        permissionHandler = PermissionHandler(this)
 
         // Inicializar vistas
         val edtDNI = findViewById<EditText>(R.id.editTextText9)
@@ -44,13 +47,30 @@ class Carnet : AppCompatActivity() {
             NavigationUtils.navigateToActivity(this, Menu::class.java)
         }
 
-        // Configurar botón de generar PDF del carnet
         findViewById<Button>(R.id.btnGenerarPDFCarnet).setOnClickListener {
-            generarPDFCarnet(edtDNI.text.toString().trim())
+            val dni = edtDNI.text.toString().trim()
+            verificarPermisosYGenerarPDF(dni)
         }
     }
 
-    // Carnet.kt
+    private fun verificarPermisosYGenerarPDF(dni: String) {
+        if (pdfService.checkPermissions()) {
+            // Si ya tenemos permisos, generamos el PDF directamente
+            generarPDFCarnet(dni)
+        } else {
+            // Guardamos el DNI para usarlo después de obtener los permisos
+            pendingDNI = dni
+            // Solicitamos los permisos
+            permissionHandler.checkAndRequestPermissions {
+                // Este callback se llamará cuando se concedan los permisos
+                pendingDNI?.let { savedDNI ->
+                    generarPDFCarnet(savedDNI)
+                    pendingDNI = null
+                }
+            }
+        }
+    }
+
     private fun buscarSocio(dni: String) {
         val socio = sociosHelper.obtenerSocioPorDNI(dni)
         if (socio != null && socio["tipoSocio"] == "ASOCIADO") {
@@ -65,11 +85,8 @@ class Carnet : AppCompatActivity() {
     }
 
     private fun mostrarCarnet(socio: Map<String, String>) {
-        // Actualizar datos del carnet
         findViewById<TextView>(R.id.tvNombreCarnet).text = "${socio["nombre"]} ${socio["apellido"]}"
         findViewById<TextView>(R.id.tvDNICarnet).text = "DNI: ${socio["dni"]}"
-
-        // Fecha actual formateada
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         findViewById<TextView>(R.id.tvFechaCarnet).text = "Fecha: ${sdf.format(Date())}"
     }
@@ -84,7 +101,6 @@ class Carnet : AppCompatActivity() {
                     fecha = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
                 )
 
-                // Mostrar diálogo de éxito
                 android.app.AlertDialog.Builder(this)
                     .setTitle("Carnet Generado")
                     .setMessage("El carnet se guardó en:\n$pdfPath")
@@ -117,5 +133,31 @@ class Carnet : AppCompatActivity() {
         }
     }
 
+    // Manejar resultados de permisos
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (permissionHandler.handlePermissionsResult(requestCode, permissions, grantResults)) {
+            // Si los permisos fueron concedidos y tenemos un DNI pendiente
+            pendingDNI?.let { dni ->
+                generarPDFCarnet(dni)
+                pendingDNI = null
+            }
+        }
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        permissionHandler.handleActivityResult(requestCode, resultCode, data)?.let { permissionsGranted ->
+            if (permissionsGranted) {
+                pendingDNI?.let { dni ->
+                    generarPDFCarnet(dni)
+                    pendingDNI = null
+                }
+            }
+        }
+    }
 }
