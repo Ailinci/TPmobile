@@ -124,6 +124,7 @@
                 android:text="@string/faustina"
                 android:textSize="16sp" />
 
+
         </LinearLayout>
 
         <LinearLayout
@@ -156,59 +157,16 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/actividades_label"
+            android:id="@+id/descripcionFactura"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="@string/actividades"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:layout_margin="16dp"
+            android:text="Detalles del pago"
+            android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/actividades_field"
-            android:layout_width="wrap_content"
-            android:paddingHorizontal="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_weight="1"
-            android:text="@string/pilates_musculaci_n"
-            android:textSize="16sp"
-            android:layout_height="0dp"/>
+
     </LinearLayout>
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="183dp"
-            android:paddingHorizontal="16dp"
-            tools:layout_editor_absoluteY="597dp" >
-            <RadioButton
-                android:id="@+id/efectivo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/efectivo_10_descuento"
-                tools:layout_editor_absoluteX="160dp"
-                tools:layout_editor_absoluteY="559dp" />
-            <RadioButton
-                android:id="@+id/tarjeta_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tarjeta_1_pago_sin_inter_s"
-                tools:layout_editor_absoluteX="160dp"
-                tools:layout_editor_absoluteY="559dp" />
-            <RadioButton
-                android:id="@+id/tarjeta_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tarjeta_3_pagos_sin_inter_s"
-                tools:layout_editor_absoluteX="160dp"
-                tools:layout_editor_absoluteY="559dp" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="@color/secondary">
-
-            </FrameLayout>
-        </RadioGroup>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
