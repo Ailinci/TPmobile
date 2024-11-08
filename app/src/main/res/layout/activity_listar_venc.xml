@@ -86,7 +86,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="DD/MM/YYYY" />
 
+    <ListView
+        android:id="@+id/listViewVenc"
+        android:layout_width="307dp"
+        android:layout_height="319dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="356dp"
 
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
